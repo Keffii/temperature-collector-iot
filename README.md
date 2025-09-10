@@ -18,7 +18,11 @@
 ---
 
 ##  Tech Stack
-
+- Java JDK 
+- MySQL
+- REST
+- Hibernate
+- Thymeleaf
 
 
 ---
