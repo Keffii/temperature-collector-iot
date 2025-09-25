@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Settings</title>
+    <link rel="stylesheet" th:href="@{/assets/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/fontawesome.min.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="dashboard-navbar" th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/liveTemp :: liveTemp}"></div>
+<div class="dashboard-shell">
+    <aside th:replace="~{fragments/sidebar :: sidebar}"></aside>
+    <main class="dashboard-main">
+        <div class="container py-4">
+            <h2><i class="fa-solid fa-gear me-2"></i>Settings</h2>
+            <div class="alert alert-warning mt-4" role="alert">
+                <i class="fa-solid fa-tools me-2"></i> Under Construction
+            </div>
+            <p class="text-muted small mb-0">This section will allow you to configure thresholds, data retention and graph preferences.</p>
+        </div>
+    </main>
+</div>
+</body>
+</html>

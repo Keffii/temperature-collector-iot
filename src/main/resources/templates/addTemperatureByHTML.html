@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Book</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Temperature</title>
+    <link rel="stylesheet" th:href="@{/assets/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/fontawesome.min.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body>
+<body class="container py-4">
 
-<form action="addTemperatureByHTML" method="post">
-    <label>Temperature:</label><br>
-    <input type="text" name="value"><br>
-    <input type="submit" value="Submit">
+<!-- Navbar fragment -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<h1 class="mb-4">Add Temperature</h1>
+<form th:action="@{/temperature/addTemperatureByHTML}" th:object="${temperature}" method="post" class="row g-3">
+    <div class="col-auto">
+        <label class="form-label" for="valueInput">Temperature (°C)</label>
+        <input id="valueInput" type="number" step="0.1" min="-100" max="200" th:field="*{value}" class="form-control" placeholder="e.g. 23.5" required>
+    </div>
+    <div class="col-auto align-self-end">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a th:href="@{/temperature/list}" class="btn btn-secondary">Cancel</a>
+    </div>
 </form>
 
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

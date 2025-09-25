@@ -1,0 +1,47 @@
+<!-- Live temperature bar fragment -->
+<div th:fragment="liveTemp">
+    <div id="live-temp-wrapper" class="live-temp-bar">
+        <div class="container-fluid d-flex align-items-center gap-3">
+            <span class="live-label"><i class="fa-solid fa-bolt me-1"></i>Live Temperature:</span>
+         <span id="live-temp-value" class="live-temp-value">--°C</span>
+         <span id="live-temp-time" class="live-temp-time text-muted small"></span>
+            <button type="button" id="live-temp-refresh" class="btn btn-sm btn-outline-light ms-auto">Refresh</button>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        (function(){
+            const valueEl = document.getElementById('live-temp-value');
+            const timeEl = document.getElementById('live-temp-time');
+            const btn = document.getElementById('live-temp-refresh');
+            let timer;
+            async function load(){
+                try {
+                    const r = await fetch('/api/latest-temp',{cache:'no-store'});
+                    if(!r.ok) throw new Error('Bad response');
+                    const data = await r.json();
+                    if(data.value !== null && data.value !== undefined){
+                        const rounded = Math.round(data.value);
+                        valueEl.textContent = rounded + '°C';
+                        valueEl.classList.toggle('hot', rounded >= 20);
+                        valueEl.classList.toggle('cold', rounded < 20);
+                        if(data.timestamp){
+                            // Parse LocalDateTime string (no zone) as local
+                            const parts = data.timestamp.split(/[T.]/); // date, time
+                            const timePart = parts[1] || '';
+                            timeEl.textContent = timePart.substring(0,8);
+                        }
+                    } else {
+                        valueEl.textContent='--';
+                        timeEl.textContent='No data';
+                    }
+                } catch(e){
+                    timeEl.textContent='Error';
+                }
+            }
+            btn && btn.addEventListener('click', load);
+            load();
+            timer = setInterval(load, 10000);
+        })();
+    </script>
+</div>
+

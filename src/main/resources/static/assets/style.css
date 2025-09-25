@@ -1,0 +1,375 @@
+/* Global frontend styles (now served from classpath:/static/assets/) */
+body { background-color: #f8f9fa; }
+h1 { font-weight: 600; }
+.table td, .table th {
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+}
+.container { max-width: 960px; }
+
+/* Temperature colors */
+.temp-cold { color: #28a745 !important; } /* Green for < 20°C */
+.temp-hot { color: #dc3545 !important; }  /* Red for >= 20°C */
+
+/* Navbar customization */
+.navbar {
+    background-color: #092635 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.nav-link, .navbar-brand {
+    color: white !important;
+    opacity: 1;
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    opacity: 0.9;
+}
+
+.navbar-brand .fa-temperature-high {
+    color: #dc3545;
+    font-size: 1.3em;
+}
+
+/* Group headers styling */
+.group-header {
+    background-color: #092635;
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.group-header i {
+    opacity: 0.9;
+}
+
+/* Table styling */
+.table {
+    background: white;
+    border: 1px solid #dee2e6;
+    margin-bottom: 2rem;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.table td {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Latest temperature card */
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #092635 !important;
+    color: white;
+    border: none;
+    padding: 1rem;
+}
+
+.display-5 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+/* Nav tabs customization for visibility */
+.nav-tabs {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #092635;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 1rem;
+}
+.nav-tabs .nav-link {
+    background-color: #e3eaf2;
+    color: #092635 !important;
+    border: 1px solid #092635;
+    margin-right: 2px;
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+}
+.nav-tabs .nav-link i {
+    color: #092635 !important;
+    margin-right: 6px;
+    font-size: 1.1em;
+    transition: color 0.2s;
+}
+.nav-tabs .nav-link.active {
+    background-color: #092635 !important;
+    color: #fff !important;
+    border-bottom: 2px solid #092635;
+}
+.nav-tabs .nav-link.active i {
+    color: #fff !important;
+}
+.nav-tabs .nav-link:hover {
+    background-color: #ffe0b2;
+    color: #ff9800 !important;
+}
+.nav-tabs .nav-link:hover i {
+    color: #ff9800 !important;
+}
+
+/* Fallback for navbar menu if Bootstrap fails */
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.navbar-nav .nav-item {
+    display: flex;
+    align-items: center;
+}
+.navbar-nav .nav-link {
+    color: #fff !important;
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 1.05em;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+.navbar-nav .nav-link:hover {
+    background: #143a4d;
+    color: #ff9800 !important;
+}
+
+/* Calendar grid for month/year blocks */
+.calendar-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 2rem;
+}
+.calendar-block {
+    background: #fff;
+    border: 2px solid #e3eaf2;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    width: 80px;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+.calendar-block.temp-hot {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+.calendar-block.temp-cold {
+    border-color: #28a745;
+    color: #28a745;
+}
+.calendar-block:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+    border-width: 3px;
+}
+.calendar-day {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+.calendar-avg {
+    font-size: 1em;
+    opacity: 0.85;
+}
+
+/* Dashboard layout and sidebar styles */
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+.sidebar {
+    width: 220px;
+    background: #092635;
+    color: #fff;
+    min-height: 100vh;
+    padding-top: 2rem;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.07);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar-menu li {
+    margin-bottom: 1.2rem;
+}
+.sidebar-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+.sidebar-menu a i {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+.sidebar-menu a:hover {
+    background: #143a4d;
+    color: #ff9800;
+}
+.dashboard-main {
+    flex: 1;
+    min-width: 0;
+    background: #f8f9fa;
+}
+@media (max-width: 900px) {
+    .dashboard-layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        position: static;
+        box-shadow: none;
+        padding-top: 0.5rem;
+    }
+    .dashboard-main {
+        width: 100%;
+    }
+}
+
+/* Top accent bar style */
+.top-accent-bar {
+    border-bottom: 4px solid #e53935;
+    background: #092635;
+    box-shadow: 0 2px 4px rgba(0,0,0,.25);
+}
+.top-accent-bar .navbar {
+    margin-bottom: 0;
+    padding-top: .4rem;
+    padding-bottom: .4rem;
+}
+.dashboard-shell {
+    display: flex;
+}
+
+/* Live temperature bar */
+.live-temp-bar { background:#12313f; border-bottom:1px solid #e53935; font-size:.9rem; color:#fff; }
+.live-temp-bar .live-label { font-weight:500; letter-spacing:.5px; }
+.live-temp-value { font-weight:600; font-size:1.05rem; }
+.live-temp-value.hot { color:#dc3545; }
+.live-temp-value.cold { color:#28a745; }
+.live-temp-time { font-family:monospace; }
+#live-temp-refresh { line-height:1; }
+
+/* Sidebar live temperature widget styles */
+.sidebar-live-widget {
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    background:linear-gradient(145deg,#0e3140,#0a2833);
+    padding:1rem .9rem 1.1rem;
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:10px;
+}
+.live-temp-heading {
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-weight:600;
+    opacity:.85;
+    margin-bottom:.35rem;
+    color:#fff;
+}
+.live-temp-value-display {
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    gap:.25rem;
+    line-height:1;
+    margin-bottom:.25rem;
+}
+.live-temp-big {
+    font-size:3rem;
+    font-weight:700;
+    color:#ffffff;
+    font-variant-numeric:tabular-nums;
+    text-shadow:0 0 6px rgba(255,255,255,0.15);
+}
+.live-temp-unit {
+    font-size:1rem;
+    margin-top:.4rem;
+    opacity:.8;
+    color:#fff;
+}
+.live-temp-timestamp {
+    font-family:monospace;
+    letter-spacing:.5px;
+}
+.sidebar-live-widget .btn-outline-light {
+    padding:.25rem .5rem;
+    font-size:.65rem;
+    border-color:rgba(255,255,255,0.35);
+}
+.sidebar-live-widget .btn-outline-light:hover {
+    background:#fff;
+    color:#092635;
+}
+/* Ensure color classes override base */
+.live-temp-big.temp-hot { color:#dc3545; }
+.live-temp-big.temp-cold { color:#28a745; }
+
+/* =========================================
+   DEBUG LAYOUT HELPERS (remove when done)
+   ========================================= */
+/* Simple immediate red border around bootstrap container */
+.container { border: 2px solid rgba(255,0,0,0.35); background: #E2E8E2; border-radius: 15px ; align-items: center; margin: 10px auto 30px auto; padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+
+/* More granular colored outlines enabled only when body has class debug-layout */
+body.debug-layout .dashboard-navbar { outline: 2px solid #ff1744; }
+body.debug-layout .dashboard-shell { outline: 2px dashed #f44336; }
+body.debug-layout aside.sidebar { outline: 2px solid #ff9100; }
+body.debug-layout .dashboard-main { outline: 2px solid #2979ff; }
+body.debug-layout .dashboard-main .container { outline: 1px dashed #d500f9; }
+
+/* Helper badge to visually mark debug mode */
+body.debug-layout::after {
+    content: "DEBUG LAYOUT ON";
+    position: fixed;
+    top: 6px; right: 10px;
+    background: #ff1744;
+    color: #fff;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    z-index: 2000;
+    letter-spacing: .5px;
+    font-weight: 600;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/assets/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/fontawesome.min.css}">
+</head>
+<body>
+<!-- Top Navbar -->
+<div class="dashboard-navbar" th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/liveTemp :: liveTemp}"></div>
+<!-- Shell with sidebar + main -->
+<div class="dashboard-shell">
+    <aside th:replace="~{fragments/sidebar :: sidebar}"></aside>
+    <main class="dashboard-main">
+        <div class="container py-4">
+            <h2>Welcome to Temperature Monitor</h2>
+            <p class="lead">Your IoT temperature dashboard.</p>
+            <div class="quick-links mt-4">
+                <a class="quick-link" th:href="@{/temperature/list(group='day')}"><i class="fa-solid fa-calendar-day"></i> Day View</a>
+                <a class="quick-link" th:href="@{/temperature/list(group='month')}"><i class="fa-regular fa-calendar-days"></i> Month View</a>
+                <a class="quick-link" th:href="@{/temperature/list(group='year')}"><i class="fa-regular fa-calendar"></i> Year View</a>
+                <a class="quick-link" th:href="@{/graph}"><i class="fa-solid fa-chart-line"></i> Graphs</a>
+            </div>
+            <hr/>
+            <p class="text-muted small mb-0">Static assets served from <code>src/main/resources/static</code>. Templates from <code>src/main/resources/templates</code>.</p>
+        </div>
+    </main>
+</div>
+</body>
+</html>

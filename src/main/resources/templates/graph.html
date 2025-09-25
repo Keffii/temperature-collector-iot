@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Statistics & Graph</title>
+    <link rel="stylesheet" th:href="@{/assets/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/fontawesome.min.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="dashboard-navbar" th:replace="~{fragments/navbar :: navbar}"></div>
+<!--<div th:replace="~{fragments/liveTemp :: liveTemp}"></div>-->
+<div class="dashboard-shell">
+    <aside th:replace="~{fragments/sidebar :: sidebar}"></aside>
+    <main class="dashboard-main">
+        <div class="container py-4">
+            <h2><i class="fa-solid fa-chart-line me-2"></i>Statistics & Graph</h2>
+            <div class="row mb-5">
+                <div class="col-12 col-lg-8">
+                    <h4 class="mb-3">Today</h4>
+                    <canvas id="todayChart" height="220"></canvas>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-12 col-lg-8">
+                    <h4 class="mb-3">This Month (Daily Avg)</h4>
+                    <canvas id="monthChart" height="220"></canvas>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-12 col-lg-8">
+                    <h4 class="mb-3">This Year (Monthly Avg)</h4>
+                    <canvas id="yearChart" height="220"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script th:inline="javascript">
+    // Today
+    const todayLabels = [[${todayGraph.labels}]];
+    const todayData = [[${todayGraph.values}]];
+    new Chart(document.getElementById('todayChart').getContext('2d'), {
+        type: 'line',
+        data: { labels: todayLabels, datasets: [{ label: 'Temperature (°C)', data: todayData, borderColor: '#092635', backgroundColor: 'rgba(9,38,53,0.1)', pointBackgroundColor: '#dc3545', pointRadius: 5, fill: true, tension: 0.2 }]},
+        options: { responsive: true, plugins: { legend: { display: true } }, scales: { x: { title: { display: true, text: 'Time'}}, y: { title: { display: true, text: 'Temperature (°C)'}, min:0, max:60 }}}
+    });
+    // Month
+    const monthLabels = [[${monthGraph.labels}]];
+    const monthData = [[${monthGraph.values}]];
+    new Chart(document.getElementById('monthChart').getContext('2d'), {
+        type: 'bar',
+        data: { labels: monthLabels, datasets: [{ label: 'Avg Temperature (°C)', data: monthData, backgroundColor: 'rgba(40,167,69,0.2)', borderColor:'#28a745', borderWidth:2 }]},
+        options: { responsive:true, plugins:{ legend:{ display:true }}, scales:{ x:{ title:{ display:true, text:'Day'}}, y:{ title:{ display:true, text:'Temperature (°C)'}, min:0, max:60 }}}
+    });
+    // Year
+    const yearLabels = [[${yearGraph.labels}]];
+    const yearData = [[${yearGraph.values}]];
+    new Chart(document.getElementById('yearChart').getContext('2d'), {
+        type: 'bar',
+        data: { labels: yearLabels, datasets: [{ label: 'Avg Temperature (°C)', data: yearData, backgroundColor: 'rgba(220,53,69,0.2)', borderColor:'#dc3545', borderWidth:2 }]},
+        options: { responsive:true, plugins:{ legend:{ display:true }}, scales:{ x:{ title:{ display:true, text:'Month'}}, y:{ title:{ display:true, text:'Temperature (°C)'}, min:0, max:60 }}}
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!-- Sidebar fragment for vertical menu -->
+<div th:fragment="sidebar">
+    <nav class="sidebar">
+        <!-- Live temperature widget -->
+        <div class="sidebar-live-widget mb-4" aria-label="Live Temperature">
+            <div class="live-temp-heading">
+                <i class="fa-solid fa-bolt me-1"></i> Live
+            </div>
+            <div class="live-temp-value-display">
+                <span id="sidebar-live-temp-value" class="live-temp-big">--</span>
+                <span class="live-temp-unit">°C</span>
+            </div>
+          <!--  <div id="sidebar-live-temp-sensor-date" class="small text-muted">Date: --</div> -->
+          <!--  <div id="sidebar-live-temp-time" class="live-temp-timestamp small text-muted">Sensor: --:--</div>-->
+            <div id="sidebar-current-date" class="live-current-time small">Today: --</div>
+            <div id="sidebar-current-time" class="live-current-time small">--:--:--</div>
+            <button type="button" id="sidebar-live-temp-refresh" class="btn btn-sm btn-outline-light w-100 mt-2">Refresh</button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a th:href="@{/temperature/list(group='day')}"><i class="fa-solid fa-calendar-day"></i> Day</a></li>
+            <li><a th:href="@{/temperature/list(group='month')}"><i class="fa-regular fa-calendar-days"></i> Month</a></li>
+            <li><a th:href="@{/temperature/list(group='year')}"><i class="fa-regular fa-calendar"></i> Year</a></li>
+            <li><a th:href="@{/graph}"><i class="fa-solid fa-chart-line"></i> Graph</a></li>
+            <li><a th:href="@{/settings}"><i class="fa-solid fa-gear"></i> Settings</a></li>
+        </ul>
+    </nav>
+    <script th:inline="javascript">
+        (function(){
+            const val = document.getElementById('sidebar-live-temp-value');
+            const sensorTimeEl = document.getElementById('sidebar-live-temp-time');
+            const sensorDateEl = document.getElementById('sidebar-live-temp-sensor-date');
+            const btn = document.getElementById('sidebar-live-temp-refresh');
+            const clockEl = document.getElementById('sidebar-current-time');
+            const todayDateEl = document.getElementById('sidebar-current-date');
+            function pad(n){return n<10?('0'+n):n;}
+            function formatDate(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
+            function updateClock(){
+                const now = new Date();
+                clockEl.textContent = pad(now.getHours())+":"+pad(now.getMinutes())+":"+pad(now.getSeconds());
+                todayDateEl.textContent = "Today: "+formatDate(now);
+            }
+            async function load(){
+                try {
+                    const r = await fetch('/api/latest-temp',{cache:'no-store'});
+                    if(!r.ok) throw new Error();
+                    const d = await r.json();
+                    if(d && d.value !== null && d.value !== undefined){
+                        const rounded = Math.round(d.value);
+                        val.textContent = rounded;
+                        val.classList.toggle('temp-hot', rounded >= 20);
+                        val.classList.toggle('temp-cold', rounded < 20);
+                        if(d.timestamp){
+                            const parts = d.timestamp.split('T');
+                            const datePart = parts[0];
+                            const timePart = (parts[1]||'').substring(0,5);
+                            sensorDateEl.textContent = 'Date: '+ datePart;
+                            sensorTimeEl.textContent = 'Sensor: '+ timePart;
+                        } else {
+                            sensorDateEl.textContent = 'Date: --';
+                            sensorTimeEl.textContent = 'Sensor: --:--';
+                        }
+                    } else {
+                        val.textContent='--';
+                        sensorDateEl.textContent='Date: No data';
+                        sensorTimeEl.textContent='Sensor: No data';
+                        val.classList.remove('temp-hot','temp-cold');
+                    }
+                } catch(e){
+                    sensorTimeEl.textContent='Sensor: Err';
+                    sensorDateEl.textContent='Date: Err';
+                }
+            }
+            btn && btn.addEventListener('click', load);
+            load();
+            setInterval(load, 10000);
+            updateClock();
+            setInterval(updateClock,1000);
+        })();
+    </script>
+</div>

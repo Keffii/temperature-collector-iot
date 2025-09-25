@@ -1,0 +1,19 @@
+<!-- Navbar fragment used across pages -->
+<div th:fragment="navbar">
+    <div class="top-accent-bar">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}">
+                    <i class="fa-solid fa-temperature-high me-2"></i>Temperature Monitor
+                </a>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/temperature/list(group='day')}">Day</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/temperature/list(group='month')}">Month</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/temperature/list(group='year')}">Year</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/graph}">Graph</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/settings}"><i class="fa-solid fa-gear"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
