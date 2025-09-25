@@ -5,9 +5,11 @@
 
 ##  Contents
 
-- [Overview](#overview)  
-- [Tech Stack](#tech-stack)  
-- [Prerequisites](#prerequisites)
+- [IoT24 System Integration](#iot24-system-integration)
+  - [Contents](#contents)
+  - [Overview](#overview)
+  - [Tech Stack](#tech-stack)
+    - [Prerequisites](#prerequisites)
 
 
 ---
@@ -23,7 +25,6 @@
 - REST
 - Hibernate
 - Thymeleaf
-
 
 ---
 
